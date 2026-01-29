@@ -45,6 +45,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
 serializer = URLSafeTimedSerializer(SECRET_KEY)
+IS_PROD = os.getenv("ENV") == "production"
 
 MOCK_AI = False
 TRIAL_LIMIT = 3
@@ -547,7 +548,7 @@ def signup_or_login(
             token,
             httponly=True,
             samesite="lax",
-            secure=False  # change to True when HTTPS is live
+            secure=IS_PROD  # change to True when HTTPS is live
         )
         db.close()
         return response
@@ -585,7 +586,7 @@ def signup_or_login(
         token,
         httponly=True,
         samesite="lax",
-        secure=False  # change to True when HTTPS is live
+        secure=IS_PROD  # change to True when HTTPS is live
     )
     return response
 
@@ -639,7 +640,7 @@ def magic_login(token: str):
         session_token,
         httponly=True,
         samesite="lax",
-        secure=False  # will change later
+        secure=IS_PROD # will change later
     )
 
     return response
