@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>LeerSlim Pro – Betaling</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system;
+      background: #f6f9fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    .btn {
+      background: #0F3C64;
+      color: white;
+      padding: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
+      margin-top: 20px;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: #0F3C64;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🎓 LeerSlim Pro</h2>
+    <p><strong>R300 / maand</strong></p>
+
+    <ul style="text-align:left">
+      <li>✔ 10 vrae per dag</li>
+      <li>✔ CAPS-goedgekeur</li>
+      <li>✔ Geen finale antwoorde</li>
+      <li>✔ Onderwyser-styl verduidelikings</li>
+    </ul>
+
+    <!-- TEMP: simulate payment -->
+    <a href="/payment-success" class="btn">
+      Simuleer betaling (dev)
+    </a>
+
+    <a href="/chat" class="btn secondary">
+      Miskien later
+    </a>
+  </div>
+</body>
+</html>

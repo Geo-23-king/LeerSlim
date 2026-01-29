@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+    <meta charset="UTF-8">
+    <title>LeerSlim – Leer slimmer. Verstaan beter.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/install.css">
+    <link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#1f3b5c">
+</head>
+
+<body>
+<!-- STICKY HEADER -->
+<div id="stickyHeader" class="sticky-header">
+    <div class="sticky-inner">
+        <div class="sticky-logo">
+            <img src="/static/leerslim-logo1.png" alt="LeerSlim">
+            <span>LeerSlim</span>
+        </div>
+
+
+        <a href="/signup" class="sticky-cta">
+            Begin vandag
+        </a>
+    </div>
+</div>
+
+
+
+<div id="installBanner" class="install-banner">
+  <span>📱 Installeer LeerSlim op jou foon</span>
+  <div>
+    <button id="installBtn">Installeer</button>
+    <button onclick="closeInstallBanner()">✕</button>
+  </div>
+</div>
+
+<header class="hero">
+
+    <div class="logo-wrap">
+        <img src="/static/leerslim-logo1.png" alt="LeerSlim Logo" class="logo">
+    </div>
+
+    <h1 class="brand">LeerSlim</h1>
+
+    <p class="tagline">
+        Leer slimmer. Verstaan beter.
+    </p>
+
+    <div class="cta">
+        <a href="/signup">Begin vandag</a>
+    </div>
+
+    <div class="typing">
+        Jou slim leermaat vir skool.
+    </div>
+
+</header>
+
+<!-- ✅ TRUST PROMISE -->
+<section class="trust">
+    <h2>📜 Ons leer – ons doen nie huiswerk namens jou nie</h2>
+    <p>
+        LeerSlim vervang nie onderwysers nie.
+        Dit help leerders om <strong>te verstaan hoe om te dink</strong>,
+        nie om net antwoorde te kopieer nie.
+    </p>
+</section>
+
+<section>
+    <div class="features">
+
+        <div class="card">
+            <h3>📘 Stap-vir-stap verduidelikings</h3>
+            <p>
+                LeerSlim gee nie net antwoorde nie.
+                Ons help leerders om regtig te verstaan hoe om probleme op te los.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 Afrikaans & Engels</h3>
+            <p>
+                Leer in jou voorkeurtaal met verduidelikings
+                wat pas by die Suid-Afrikaanse kurrikulum.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🎧 Praat soos ’n onderwyser</h3>
+            <p>
+                ’n Rustige, vriendelike stem wat verduidelik
+                soos ’n regte onderwyser – op jou vlak.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="future">
+    <h2>Wat jy met LeerSlim kan doen</h2>
+    <p class="future-sub">
+        Alles ontwerp om leer maklik, veilig en slim te maak.
+    </p>
+
+    <div class="future-grid">
+
+        <div class="future-card">
+            <span>📷</span>
+            <h4>Laai huiswerkfoto op</h4>
+            <p>Neem ’n foto of laai ’n lêer op – LeerSlim verduidelik dit stap vir stap.</p>
+        </div>
+
+        <div class="future-card">
+            <span>🎙</span>
+            <h4>Onderwyser-stem</h4>
+            <p>Luister na verduidelikings in Afrikaans of Engels, soos ’n regte onderwyser.</p>
+        </div>
+
+        <div class="future-card">
+            <span>🎓</span>
+            <h4>Kies jou graad</h4>
+            <p>Graad 4–12 verduidelikings wat pas by jou vlak.</p>
+        </div>
+
+        <div class="future-card">
+            <span>🔐</span>
+            <h4>Veilige gebruikersrekeninge</h4>
+            <p>Elke leerder het ’n eie profiel – veilig vir ouers en skole.</p>
+        </div>
+
+        <div class="future-card">
+            <span>💳</span>
+            <h4>Maklike betalings</h4>
+            <p>Maandelikse intekening via PayFast in Suid-Afrikaanse rand.</p>
+        </div>
+
+        <div class="future-card">
+            <span>📱</span>
+            <h4>Werk op enige toestel</h4>
+            <p>Gebruik LeerSlim op selfoon, tablet of rekenaar.</p>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="trust">
+        <h2>Ouers kan ons vertrou</h2>
+        <p>
+            LeerSlim is ontwerp om leer te ondersteun – nie om te kul nie.
+            Veilig, opvoedkundig en geskik vir skole.
+        </p>
+        <p style="margin-top:20px;">
+            ✔ Geen kopie-en-plak antwoorde<br>
+            ✔ Geen onvanpaste inhoud<br>
+            ✔ Fokus op begrip
+        </p>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            💬 Vra LeerSlim
+            <span style="float:right; cursor:pointer;" onclick="closeModal()">✕</span>
+        </div>
+
+        <div class="modal-body">
+
+  <!-- STEP 1: Parent Start -->
+  <div class="step" id="step-1">
+    <h3>Welkom by LeerSlim 👋</h3>
+    <p>Hierdie hulpmiddel is vir ouers om hul kinders te help leer.</p>
+    <button class="send-btn" onclick="nextStep(2)">Begin</button>
+  </div>
+
+  <!-- STEP 2: Learner Profile -->
+  <div class="step" id="step-2" style="display:none;">
+    <h3>👧👦 Voeg leerder by</h3>
+    <input type="text" placeholder="Leerder se naam" class="input">
+    <button class="send-btn" onclick="nextStep(3)">Volgende</button>
+  </div>
+
+  <!-- STEP 3: Grade Selector -->
+  <div class="step" id="step-3" style="display:none;">
+    <h3>🎓 Kies graad</h3>
+    <select class="input">
+      <option>Graad 4</option>
+      <option>Graad 5</option>
+      <option>Graad 6</option>
+      <option>Graad 7</option>
+      <option>Graad 8</option>
+      <option>Graad 9</option>
+      <option>Graad 10</option>
+      <option>Graad 11</option>
+      <option>Graad 12</option>
+    </select>
+    <button class="send-btn" onclick="nextStep(4)">Begin leer</button>
+  </div>
+            <!-- INSTALL APP BANNER -->
+<div id="installBanner" class="install-banner">
+    <div class="install-content">
+        <img src="/static/leerslim-logo1.png" alt="LeerSlim App" class="install-logo">
+
+        <div class="install-text">
+            <strong>Installeer LeerSlim App</strong>
+            <span>Vinniger toegang • Werk soos ’n regte app</span>
+        </div>
+
+        <button id="installBtn" class="install-btn">
+            Installeer
+        </button>
+
+        <button class="install-close" onclick="closeInstallBanner()">✕</button>
+    </div>
+</div>
+
+  <!-- STEP 4: Homework -->
+  <div class="step" id="step-4" style="display:none;">
+    <h3>📘 Vra jou huiswerk</h3>
+
+    <div class="modal-input">
+      <button class="icon-btn">📷</button>
+      <button class="icon-btn">📎</button>
+      <textarea placeholder="Tik jou huiswerkvraag hier..."></textarea>
+      <button class="send-btn" onclick="send()">Stuur</button>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>LeerSlim dink…</p>
+    </div>
+
+    <p style="margin-top:12px; font-size:13px; color:#4a6b88;">
+      Gratis gebruik beperk • Opgradeer vir onbeperkte vrae
+    </p>
+  </div>
+
+</div>
+    </div>
+</div>
+
+<footer>
+    © 2026 LeerSlim · Privaatheid · Kontak
+</footer>
+
+<script>
+function openModal() {
+    // Show modal
+    document.getElementById("modal").style.display = "block";
+
+    // Reset steps (important)
+    document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-1').style.display = 'block';
+
+    // Hide loading if it was shown
+    const loading = document.getElementById("loading");
+    if (loading) loading.style.display = "none";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function send() {
+    document.getElementById("loading").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+    }, 2000);
+}
+</script>
+<script>
+function nextStep(step) {
+  document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+  document.getElementById('step-' + step).style.display = 'block';
+}
+</script>
+<script>
+const stickyHeader = document.getElementById("stickyHeader");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 180) {
+        stickyHeader.classList.add("show");
+    } else {
+        stickyHeader.classList.remove("show");
+    }
+});
+</script>
+
+<script>
+const banner = document.getElementById("installBanner");
+const installBtn = document.getElementById("installBtn");
+
+// FORCE SHOW for testing
+window.addEventListener("load", () => {
+    if (!localStorage.getItem("leerslim_install_dismissed")) {
+        banner.style.display = "block";
+    }
+});
+
+function closeInstallBanner() {
+    banner.style.display = "none";
+    localStorage.setItem("leerslim_install_dismissed", "1");
+}
+
+installBtn?.addEventListener("click", () => {
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+    if (isIOS) {
+        alert(
+            "📱 iPhone:\nTik op Deel (⬆️) en kies ‘Voeg by tuisskerm’"
+        );
+    } else {
+        alert(
+            "📲 Android / Desktop:\nGebruik Chrome-menu → Install LeerSlim"
+        );
+    }
+});
+</script>
+<script>
+let deferredPrompt;
+const banner = document.getElementById("installBanner");
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  banner.style.display = "flex";
+});
+
+installBtn?.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  banner.style.display = "none";
+});
+
+function closeInstallBanner() {
+  banner.style.display = "none";
+}
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/service-worker.js")
+    .then(() => console.log("✅ LeerSlim PWA ready"))
+    .catch(err => console.error("❌ SW error", err));
+}
+</script>
+
+
+</body>
+</html>

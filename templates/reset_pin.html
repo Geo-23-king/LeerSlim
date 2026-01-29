@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>Stel nuwe PIN | LeerSlim</title>
+  <link rel="stylesheet" href="/static/auth.css">
+</head>
+
+<body class="auth-body">
+
+  <div class="auth-card">
+
+    <div class="auth-title">🔐 Stel nuwe PIN</div>
+    <div class="auth-subtitle">
+      Kies ’n nuwe <strong>4-syfer PIN</strong><br>
+      om weer veilig aan te meld.
+    </div>
+
+    {% if error %}
+      <div class="auth-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" class="auth-form">
+      <input type="hidden" name="token" value="{{ token }}">
+
+      <input
+        type="password"
+        name="new_pin"
+        maxlength="4"
+        inputmode="numeric"
+        placeholder="Nuwe 4-syfer PIN"
+        required
+      >
+
+      <button class="auth-btn" type="submit">
+        Stoor nuwe PIN
+      </button>
+    </form>
+
+  </div>
+
+</body>
+</html>

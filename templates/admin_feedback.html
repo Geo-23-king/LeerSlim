@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>LeerSlim – Terugvoer</title>
+  <style>
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: #f6f9fc;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #0F3C64;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      border-collapse: collapse;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #eef2f7;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f0f4fa;
+      font-weight: 600;
+      color: #1f3a5f;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td.comment {
+      max-width: 420px;
+      white-space: pre-wrap;
+    }
+
+    .muted {
+      color: #6b7f95;
+    }
+  </style>
+</head>
+<body>
+
+<h2>📬 LeerSlim – Alle Terugvoer</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Graad</th>
+      <th>Ervaring</th>
+      <th>Kommentaar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in feedback %}
+    <tr>
+      <td class="muted">{{ f.created.strftime("%Y-%m-%d %H:%M") }}</td>
+      <td>Graad {{ f.grade }}</td>
+      <td>{{ f.rating }}</td>
+      <td class="comment">{{ f.comment or "—" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>

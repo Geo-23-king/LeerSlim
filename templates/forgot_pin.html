@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>Veilige aanmelding | LeerSlim</title>
+  <link rel="stylesheet" href="/static/auth.css">
+</head>
+
+<body class="auth-body">
+
+  <div class="auth-card">
+
+    <div class="auth-title">🔐 Kan jy nie aanmeld nie?</div>
+
+    <div class="auth-subtitle">
+      Voer die ouer se e-posadres in.<br>
+      Ons stuur ’n <strong>veilige aanmeld-skakel</strong>.
+    </div>
+
+    {% if error %}
+      <div class="auth-error">{{ error }}</div>
+    {% endif %}
+
+    {% if message %}
+      <div class="auth-success">{{ message }}</div>
+    {% endif %}
+
+    <form method="post" class="auth-form">
+      <input
+        type="email"
+        name="parent_email"
+        placeholder="Ouer se e-posadres"
+        required
+      >
+
+      <button class="auth-btn" type="submit">
+        Stuur aanmeld-skakel
+      </button>
+    </form>
+
+    <a class="auth-link" href="/signup">
+      ← Terug na aanmelding
+    </a>
+
+  </div>
+
+</body>
+</html>

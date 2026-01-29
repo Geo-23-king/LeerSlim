@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>Begin met LeerSlim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/signup.css">
+</head>
+
+<body>
+  <div class="signup-page">
+    <div class="signup-card">
+      {% if error %}
+  <div class="error-box">
+    {{ error }}
+  </div>
+{% endif %}
+
+      <!-- LOGO -->
+      <div class="signup-logo">
+        <img src="/static/leerslim-logo1.png" alt="LeerSlim logo">
+      </div>
+
+      <h1>Begin met LeerSlim 🎓</h1>
+      <p class="sub">
+  Skep ’n veilige leerderprofiel <strong>of</strong> meld aan met jou bestaande PIN.<br>
+  Begin met <strong>3 gratis vrae</strong>.
+</p>
+
+      <!-- ✅ IMPORTANT: POST TO /signup -->
+      <form method="post" action="/signup" onsubmit="lockButton()">
+
+        <div class="form-group">
+          <label>Ouer se e-posadres</label>
+          <input type="email" name="parent_email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Leerder se naam</label>
+          <input
+  type="text"
+  name="learner_name"
+  placeholder="Slegs vir nuwe gebruikers"
+/>
+        </div>
+
+        <div class="form-group">
+          <label>Kies graad</label>
+          <select name="grade">
+            <option value="">Kies graad (nuwe gebruikers)</option>
+            <option value="4">Graad 4</option>
+            <option value="5">Graad 5</option>
+            <option value="6">Graad 6</option>
+            <option value="7">Graad 7</option>
+            <option value="8">Graad 8</option>
+            <option value="9">Graad 9</option>
+          </select>
+        </div>
+
+       <div class="form-group">
+  <label>Leerder PIN (4 syfers)</label>
+
+  <div class="pin-wrapper">
+    <input
+      type="password"
+      name="learner_pin"
+      id="learner_pin"
+      maxlength="4"
+      pattern="\d{4}"
+      inputmode="numeric"
+      required
+    />
+
+    <button
+      type="button"
+      class="pin-toggle"
+      onclick="togglePin()"
+      aria-label="Wys PIN"
+    >
+      👁
+    </button>
+  </div>
+
+  <small>Hierdie PIN beskerm die leerder se profiel</small>
+
+  <a href="/forgot-pin" class="forgot-pin">
+    PIN vergeet?
+  </a>
+</div>
+        <div class="login-hint">
+  🔑 Het jy reeds ’n rekening?<br>
+  Gebruik dieselfde <strong>e-pos</strong> en <strong>PIN</strong> om aan te meld.
+</div>
+
+        <button type="submit" class="btn-primary">
+          Begin leer (3 gratis vrae)
+        </button>
+
+      </form>
+
+      <div class="trial-note">
+        Geen kredietkaart nodig om te begin<br>
+        Daarna: <strong>R279.99 / maand</strong>
+      </div>
+
+      <div class="signup-footer">
+        🔒 Veilig • Geskik vir skole • CAPS-gebaseer
+      </div>
+
+    </div>
+  </div>
+
+<script>
+function lockButton() {
+  const btn = document.querySelector(".btn-primary");
+  btn.disabled = true;
+  btn.innerText = "LeerSlim begin…";
+}
+</script>
+
+<script>
+function togglePin() {
+  const pin = document.getElementById("learner_pin");
+  pin.type = pin.type === "password" ? "text" : "password";
+}
+</script>
+</body>
+</html>

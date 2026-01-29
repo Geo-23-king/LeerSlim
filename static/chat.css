@@ -1,0 +1,1480 @@
+/* =========================
+   GRADE 4–7 BACKGROUND
+========================= */
+body.chat-body {
+  background-image: url("/static/learner-grade4-7.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Soft coloured overlay – keeps clicks working */
+body.chat-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  /* More colour, less white */
+  background: linear-gradient(
+    180deg,
+    rgba(230, 240, 255, 0.72),
+    rgba(255, 255, 255, 0.65)
+  );
+
+  z-index: -1; /* keep behind content */
+}
+
+/* ======================================
+   MOBILE CHAT – FIXED SCROLLING
+   ====================================== */
+@media (max-width: 768px) {
+
+  /* Let the page scroll normally */
+  body.chat-body {
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Header stays visible */
+  .chat-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  /* Chat container is the scroll area */
+  .chat-container {
+    max-height: calc(100vh - 260px);
+    overflow-y: auto;
+    padding: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Input bar stays visible */
+  .input-wrapper {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding: 10px;
+    border-top: 1px solid #e5e7eb;
+    z-index: 60;
+  }
+
+  /* Remove watermark on mobile */
+  .chat-container::before {
+    display: none;
+  }
+}
+/* ======================================
+   DESKTOP CHAT – PROFESSIONAL POLISH
+   Applies ONLY to desktop
+   ====================================== */
+@media (min-width: 769px) {
+
+  /* Center chat area better */
+  .chat-container {
+    max-width: 880px;
+    padding: 28px 20px 160px;
+  }
+
+  /* Slightly soften bubbles */
+  .bubble {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .bubble.leerslim {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+  }
+
+  .bubble.user {
+    background: linear-gradient(135deg, #0F3C64, #144d82);
+  }
+
+  /* Input wrapper – clean bar look */
+  .input-wrapper {
+    background: #ffffff;
+    border-top: 1px solid #e6edf5;
+    padding: 14px 0 18px;
+  }
+
+  /* Input row alignment */
+  .chat-input {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  /* Attach buttons – subtle */
+  .icon-btn.attach-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    border-radius: 12px;
+    background: #f3f6fb;
+  }
+
+
+
+
+  /* Textarea – main focus */
+  .chat-input textarea {
+    min-height: 44px;
+    max-height: 96px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #dbe5f0;
+    background: #ffffff;
+  }
+
+  .chat-input textarea:focus {
+    border-color: #0F3C64;
+    box-shadow: 0 0 0 3px rgba(15, 60, 100, 0.1);
+  }
+
+  /* Submit button – confident but clean */
+  .chat-input button {
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #0F3C64;
+  }
+
+  .chat-input button:hover {
+    background: #145a96;
+  }
+
+  /* Limit note – subtle, aligned right */
+  .limit-note {
+    max-width: 880px;
+    margin: 8px auto 0;
+    padding: 0 20px;
+    font-size: 12.5px;
+    color: #6b7f95;
+    text-align: right;
+  }
+}
+
+/* ======================================
+   ALIGN INPUTS PERFECTLY (DESKTOP + MOBILE)
+   ====================================== */
+
+/* Ensure subject + textarea align */
+.chat-input {
+  align-items: stretch;
+}
+
+/* Textarea aligns with subject dropdown */
+.chat-input textarea {
+  box-sizing: border-box;
+}
+
+/* Fix visual cut-off illusion */
+.chat-input textarea::placeholder {
+  line-height: 1.4;
+}
+
+/* ======================================
+   MOBILE TYPOGRAPHY POLISH
+   ====================================== */
+@media (max-width: 600px) {
+
+  /* Greeting bubble */
+  .bubble.leerslim {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Usage / how-to section */
+  .usage-hint {
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 12px 14px;
+  }
+
+  .usage-hint ol {
+    margin-left: 16px;
+  }
+
+  .usage-hint li {
+    margin-bottom: 4px;
+  }
+
+  .usage-hint small {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  /* Parent note */
+  .parent-note {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+}
+
+/* ======================================
+   MOBILE SCROLLING – SMOOTH & CORRECT
+   ====================================== */
+@media (max-width: 600px) {
+
+  body.chat-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chat-container {
+    padding-bottom: 240px; /* space for input */
+  }
+
+  .input-wrapper {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 60;
+  }
+}
+
+/* ===== HEADER TAGLINE ===== */
+.chat-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f3a5f;
+}
+
+.brand-tagline {
+  font-size: 12.5px;
+  color: #6b7f95;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+  .brand-title {
+    font-size: 15px;
+  }
+
+  .brand-tagline {
+    font-size: 12px;
+  }
+}
+
+/* Trust strip under header title */
+.trust-strip {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2f5fe0;
+  opacity: 1;
+}
+
+/* Make it calm, not loud */
+.trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Mobile polish */
+@media (max-width: 640px) {
+  .trust-strip {
+    gap: 10px;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+}
+
+.trial-status {
+  margin-top: 10px;
+}
+
+/* FILE PREVIEW */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  max-width: 420px;
+}
+
+/* IMAGE PREVIEW */
+.file-preview img {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #d1d5db;
+}
+
+/* FILE INFO + REMOVE */
+.file-preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.file-preview-actions button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+}
+
+.file-preview-actions button:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   STICKY LEARNING MODE BAR
+================================ */
+
+.learning-mode {
+  position: sticky;
+  top: 72px; /* below header */
+  z-index: 25;
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 16px;
+}
+
+/* Label */
+.mode-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+/* Tabs container */
+.mode-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Individual tab */
+.mode-tab {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #0f172a;
+}
+
+/* Active tab */
+.mode-tab.active {
+  background: #1e3a8a;
+  color: white;
+  border-color: #1e3a8a;
+}
+
+/* Small explanation text */
+.mode-tab::after {
+  content: attr(data-desc);
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .mode-tabs {
+    gap: 6px;
+  }
+
+  .mode-tab {
+    text-align: center;
+    padding: 10px;
+  }
+}
+.pro-pill {
+  background: linear-gradient(135deg, #1e3a8a, #0f3c64);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ======================================
+   FORCE "GRATIS VRAE" TO STAY VISIBLE
+   ====================================== */
+
+.trial-status {
+  position: fixed;      /* 🔥 key change */
+  top: 64px;            /* below header */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+
+  margin: 0;
+  pointer-events: none; /* prevents blocking clicks */
+}
+
+/* Give chat content space so it doesn’t hide behind badge */
+.chat-container {
+  padding-top: 56px;
+}
+
+/* ======================================
+   MOBILE – KEEP "GRATIS VRAE OOR" VISIBLE
+   ====================================== */
+@media (max-width: 768px) {
+
+  /* Make sure header area stacks correctly */
+  .chat-header {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: #ffffff;
+  }
+
+  /* Trial status pill – always visible on scroll */
+  .trial-status {
+    position: sticky;
+    top: 56px;              /* just below header */
+    z-index: 65;
+
+    margin: 8px auto 10px;
+    padding: 6px 14px;
+
+    font-size: 13px;
+    background: #eef4ff;
+    border-radius: 999px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  /* Prevent chat content from sliding under it */
+  .chat-container {
+    padding-top: 12px;
+  }
+}
+
+/* =========================
+   MOBILE: hide big mode bar
+========================= */
+@media (max-width: 768px) {
+  .learning-mode {
+    display: none;
+  }
+}
+
+/* =========================
+   SMALL AI MODE OPTIONS
+========================= */
+.ai-modes {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ai-modes button {
+  font-size: 11.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #dbe5f0;
+  background: #f8fafc;
+  color: #1f3a5f;
+  cursor: pointer;
+}
+
+.ai-modes button.active {
+  background: #1e3a8a;
+  color: #fff;
+  border-color: #1e3a8a;
+}
+
+/* ======================================
+   MOBILE-ONLY HELP BUTTONS
+====================================== */
+
+/* Hidden everywhere by default */
+.mobile-help-buttons {
+  display: none;
+}
+
+/* Mobile only */
+@media (max-width: 768px) {
+  .mobile-help-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0 14px;
+  }
+
+  .mobile-help-buttons button {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #1f3a5f;
+    border: 1px solid #dbe5f0;
+    cursor: pointer;
+  }
+
+  .mobile-help-buttons button.active {
+    background: #1e3a8a;
+    color: #ffffff;
+    border-color: #1e3a8a;
+  }
+}
+
+
+
+/* =========================
+   TRIAL STATUS BADGE
+========================= */
+.trial-status {
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  margin: 10px auto 6px;
+  padding: 6px 16px;
+
+  width: fit-content;
+  background: #eef4ff;
+  color: #1f3b5c;
+
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.trial-status span {
+  font-weight: 700;
+}
+
+/* Pulse on update */
+.pulse {
+  animation: pulse 0.4s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Trial pill */
+.trial-status {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.trial-pill {
+  background: #eef2ff;
+  color: #1f3b5c;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 0.35s ease;
+}
+
+/* Feedback button in header */
+.feedback-btn {
+  background: #1f3a5f;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.feedback-btn:hover {
+  background: #2b4d78;
+}
+
+/* Grade pill */
+.grade-pill {
+  background: #eef3f9;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+/* Modal overlay */
+.feedback-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.feedback-box {
+  background: #fff;
+  width: 360px;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.feedback-box h3 {
+  margin: 0;
+  color: #1f3a5f;
+}
+
+.feedback-sub {
+  font-size: 14px;
+  color: #5c6f82;
+  margin-bottom: 14px;
+}
+
+.feedback-box label {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.feedback-box select,
+.feedback-box textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d6dde6;
+  font-size: 14px;
+}
+
+.feedback-box textarea {
+  min-height: 80px;
+  resize: none;
+}
+
+.feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-primary {
+  background: #1f3a5f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: none;
+  color: #1f3a5f;
+  cursor: pointer;
+}
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Match LeerSlim brand color */
+.brand-grade {
+  color: #1f3a5f;        /* SAME as LeerSlim text */
+  background: #eef3f9;
+  border: 1px solid #dbe5f0;
+  font-weight: 600;
+}
+
+/* Logout button – header style */
+.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #1f2937 !important;
+  background: #f8fafc;
+  border-radius: 999px;
+
+  text-decoration: none !important;
+  border: 1px solid #e5e7eb;
+
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #eef2f7;
+  border-color: #d1d5db;
+}
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ======================================
+   MOBILE CHAT – FIXED SCROLLING
+   ====================================== */
+@media (max-width: 768px) {
+
+  /* Let the page scroll normally */
+  body.chat-body {
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* Header stays visible */
+  .chat-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  /* Chat container is the scroll area */
+  .chat-container {
+    max-height: calc(100vh - 260px);
+    overflow-y: auto;
+    padding: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Input bar stays visible */
+  .input-wrapper {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding: 10px;
+    border-top: 1px solid #e5e7eb;
+    z-index: 60;
+  }
+
+  /* Remove watermark on mobile */
+  .chat-container::before {
+    display: none;
+  }
+}
+/* ======================================
+   DESKTOP CHAT – PROFESSIONAL POLISH
+   Applies ONLY to desktop
+   ====================================== */
+@media (min-width: 769px) {
+
+  /* Center chat area better */
+  .chat-container {
+    max-width: 880px;
+    padding: 28px 20px 160px;
+  }
+
+  /* Slightly soften bubbles */
+  .bubble {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .bubble.leerslim {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+  }
+
+  .bubble.user {
+    background: linear-gradient(135deg, #0F3C64, #144d82);
+  }
+
+  /* Input wrapper – clean bar look */
+  .input-wrapper {
+    background: #ffffff;
+    border-top: 1px solid #e6edf5;
+    padding: 14px 0 18px;
+  }
+
+  /* Input row alignment */
+  .chat-input {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  /* Attach buttons – subtle */
+  .icon-btn.attach-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    border-radius: 12px;
+    background: #f3f6fb;
+  }
+
+  /* Subject selector – compact & pro */
+  .subject-select {
+    height: 44px;
+    font-size: 13.5px;
+    padding: 0 12px;
+    border-radius: 12px;
+    border: 1px solid #dbe5f0;
+    background: #ffffff;
+  }
+
+  /* Textarea – main focus */
+  .chat-input textarea {
+    min-height: 44px;
+    max-height: 96px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid #dbe5f0;
+    background: #ffffff;
+  }
+
+  .chat-input textarea:focus {
+    border-color: #0F3C64;
+    box-shadow: 0 0 0 3px rgba(15, 60, 100, 0.1);
+  }
+
+  /* Submit button – confident but clean */
+  .chat-input button {
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #0F3C64;
+  }
+
+  .chat-input button:hover {
+    background: #145a96;
+  }
+
+  /* Limit note – subtle, aligned right */
+  .limit-note {
+    max-width: 880px;
+    margin: 8px auto 0;
+    padding: 0 20px;
+    font-size: 12.5px;
+    color: #6b7f95;
+    text-align: right;
+  }
+}
+
+/* ======================================
+   ALIGN INPUTS PERFECTLY (DESKTOP + MOBILE)
+   ====================================== */
+
+/* Ensure subject + textarea align */
+.chat-input {
+  align-items: stretch;
+}
+
+/* Textarea aligns with subject dropdown */
+.chat-input textarea {
+  box-sizing: border-box;
+}
+
+/* Fix visual cut-off illusion */
+.chat-input textarea::placeholder {
+  line-height: 1.4;
+}
+
+/* ======================================
+   MOBILE TYPOGRAPHY POLISH
+   ====================================== */
+@media (max-width: 600px) {
+
+  /* Greeting bubble */
+  .bubble.leerslim {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Usage / how-to section */
+  .usage-hint {
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 12px 14px;
+  }
+
+  .usage-hint ol {
+    margin-left: 16px;
+  }
+
+  .usage-hint li {
+    margin-bottom: 4px;
+  }
+
+  .usage-hint small {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  /* Parent note */
+  .parent-note {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+}
+
+/* ======================================
+   MOBILE SCROLLING – SMOOTH & CORRECT
+   ====================================== */
+@media (max-width: 600px) {
+
+  body.chat-body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chat-container {
+    padding-bottom: 240px; /* space for input */
+  }
+
+  .input-wrapper {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 60;
+  }
+}
+
+/* ===== HEADER TAGLINE ===== */
+.chat-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f3a5f;
+}
+
+.brand-tagline {
+  font-size: 12.5px;
+  color: #6b7f95;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+/* Mobile refinement */
+@media (max-width: 600px) {
+  .brand-title {
+    font-size: 15px;
+  }
+
+  .brand-tagline {
+    font-size: 12px;
+  }
+}
+
+/* Trust strip under header title */
+.trust-strip {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2f5fe0;
+  opacity: 1;
+}
+
+/* Make it calm, not loud */
+.trust-strip span {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Mobile polish */
+@media (max-width: 640px) {
+  .trust-strip {
+    gap: 10px;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+}
+
+.trial-status {
+  margin-top: 10px;
+}
+
+/* FILE PREVIEW */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  max-width: 420px;
+}
+
+/* IMAGE PREVIEW */
+.file-preview img {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #d1d5db;
+}
+
+/* FILE INFO + REMOVE */
+.file-preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.file-preview-actions button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+}
+
+.file-preview-actions button:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   STICKY LEARNING MODE BAR
+================================ */
+
+.learning-mode {
+  position: sticky;
+  top: 72px; /* below header */
+  z-index: 25;
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 16px;
+}
+
+/* Label */
+.mode-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+/* Tabs container */
+.mode-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Individual tab */
+.mode-tab {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #0f172a;
+}
+
+/* Active tab */
+.mode-tab.active {
+  background: #1e3a8a;
+  color: white;
+  border-color: #1e3a8a;
+}
+
+/* Small explanation text */
+.mode-tab::after {
+  content: attr(data-desc);
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .mode-tabs {
+    gap: 6px;
+  }
+
+  .mode-tab {
+    text-align: center;
+    padding: 10px;
+  }
+}
+.pro-pill {
+  background: linear-gradient(135deg, #1e3a8a, #0f3c64);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ======================================
+   FORCE "GRATIS VRAE" TO STAY VISIBLE
+   ====================================== */
+
+.trial-status {
+  position: fixed;      /* 🔥 key change */
+  top: 64px;            /* below header */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+
+  margin: 0;
+  pointer-events: none; /* prevents blocking clicks */
+}
+
+/* Give chat content space so it doesn’t hide behind badge */
+.chat-container {
+  padding-top: 56px;
+}
+
+/* ======================================
+   MOBILE – KEEP "GRATIS VRAE OOR" VISIBLE
+   ====================================== */
+@media (max-width: 768px) {
+
+  /* Make sure header area stacks correctly */
+  .chat-header {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: #ffffff;
+  }
+
+  /* Trial status pill – always visible on scroll */
+  .trial-status {
+    position: sticky;
+    top: 56px;              /* just below header */
+    z-index: 65;
+
+    margin: 8px auto 10px;
+    padding: 6px 14px;
+
+    font-size: 13px;
+    background: #eef4ff;
+    border-radius: 999px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  /* Prevent chat content from sliding under it */
+  .chat-container {
+    padding-top: 12px;
+  }
+}
+
+/* =========================
+   MOBILE: hide big mode bar
+========================= */
+@media (max-width: 768px) {
+  .learning-mode {
+    display: none;
+  }
+}
+
+/* =========================
+   SMALL AI MODE OPTIONS
+========================= */
+.ai-modes {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.ai-modes button {
+  font-size: 11.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #dbe5f0;
+  background: #f8fafc;
+  color: #1f3a5f;
+  cursor: pointer;
+}
+
+.ai-modes button.active {
+  background: #1e3a8a;
+  color: #fff;
+  border-color: #1e3a8a;
+}
+
+/* ======================================================
+   ✅ FINAL MOBILE WHATSAPP-STYLE INPUT (REFINED FIT)
+====================================================== */
+@media (max-width: 768px) {
+
+  /* FORCE ONE ROW — NO WRAP */
+  .chat-input {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 5px !important;
+    width: 100% !important;
+  }
+
+  /* ➕ BUTTON — SMALLER */
+  .attach-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* SUBJECT DROPDOWN — TIGHTER */
+  .subject-select {
+    height: 32px !important;
+    max-width: 96px !important;
+    min-width: 80px !important;
+    font-size: 12.5px !important;
+    padding: 0 6px !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* TEXT INPUT — PRIORITY */
+  .chat-input textarea {
+    flex: 1 1 auto !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    padding: 6px 8px !important;
+    font-size: 13.5px !important;
+    line-height: 1.2 !important;
+    border-radius: 10px !important;
+    resize: none !important;
+    overflow: hidden !important;
+  }
+
+  /* SEND BUTTON — SLIM */
+  .chat-input button[type="submit"] {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+  }
+
+  /* REMOVE EXTRA VERTICAL SPACING */
+  .input-wrapper {
+    padding: 6px !important;
+  }
+}
+
+/* ======================================================
+   ✅ SEND BUTTON TEXT FIX (NO DUPLICATES)
+====================================================== */
+.send-text-desktop {
+  display: inline;
+}
+
+.send-text-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .send-text-desktop {
+    display: none !important;
+  }
+
+  .send-text-mobile {
+    display: inline !important;
+  }
+}
+
+/* ======================================================
+   🔧 FIX GAP BETWEEN ➕ AND "Kies vak"
+   (attach-group is the real problem)
+====================================================== */
+@media (max-width: 768px) {
+
+  /* Make attach wrapper shrink to content */
+  .attach-group {
+    display: flex !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Make + button slightly smaller */
+  .attach-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    font-size: 16px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Let subject fill remaining space naturally */
+  .subject-select {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+  }
+
+  /* Keep tight spacing only via gap */
+  .chat-input {
+    gap: 6px !important;
+  }
+}
+/* ======================================================
+   ✅ ENSURE "KRY" BUTTON IS ALWAYS VISIBLE (MOBILE)
+====================================================== */
+@media (max-width: 768px) {
+
+  /* Give send button absolute priority */
+  .chat-input button[type="submit"] {
+    flex: 0 0 auto !important;
+    min-width: 56px !important;
+    max-width: 64px !important;
+    padding: 0 10px !important;
+  }
+
+  /* Let textarea shrink instead of pushing button off */
+  .chat-input textarea {
+    flex: 1 1 0% !important;
+    min-width: 0 !important; /* 🔑 critical for flex overflow */
+  }
+
+  /* Slightly reduce dropdown width if needed */
+  .subject-select {
+    max-width: 96px !important;
+  }
+}
+
+/* ======================================================
+   ✅ MOBILE: MOVE "KRY" BUTTON BELOW ➕
+====================================================== */
+@media (max-width: 768px) {
+
+  /* Allow wrapping */
+  .chat-input {
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+  /* First row items */
+  .attach-group,
+  .subject-select,
+  .chat-input textarea {
+    order: 1;
+  }
+
+  /* Second row: send button */
+  .chat-input button[type="submit"] {
+    order: 2;
+    width: 100% !important;
+    margin-top: 6px !important;
+    height: 36px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Make textarea use full remaining width */
+  .chat-input textarea {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ======================================================
+   ✅ FINAL GUARANTEED MOBILE WIDTH FIX
+====================================================== */
+@media (max-width: 768px) {
+
+  /* Prevent container overflow */
+  .input-wrapper {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Chat input must respect padding */
+  .chat-input {
+    width: auto !important;       /* 🔑 FIX */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Textarea never exceed screen */
+  .chat-input textarea {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+}
+
+/* ======================================================
+   ✅ MOBILE: REDUCE USER TYPING TEXT SIZE
+====================================================== */
+@media (max-width: 768px) {
+
+  /* Text the user types */
+  .chat-input textarea {
+    font-size: 13px !important;   /* was ~14–15px */
+    line-height: 1.25 !important;
+  }
+
+}

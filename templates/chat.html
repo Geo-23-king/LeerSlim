@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <title>LeerSlim – Jou Slim Onderwyser</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/chat.css">
+</head>
+
+<!-- UPGRADE MODAL -->
+<div class="upgrade-modal" id="upgradeModal">
+  <div class="upgrade-box">
+    <h2>🎓 LeerSlim Pro</h2>
+
+    <p id="upgradeText">
+  Jy het jou <strong>gratis vrae</strong> gebruik.
+</p>
+    <p class="price">
+      Hou aan leer met veilige, CAPS-goedgekeurde hulp<br>
+      <strong>Slegs R279.99 / maand</strong>
+    </p>
+
+    <ul class="upgrade-list">
+      <li>✔ 10 vrae per dag</li>
+      <li>✔ Onderwyser-styl verduidelikings</li>
+      <li>✔ Geen antwoorde – net begrip</li>
+      <li>✔ Afrikaans CAPS-vakke</li>
+    </ul>
+
+    <button class="pay-btn" onclick="goToPayment()">
+      Gaan voort na betaling
+    </button>
+
+    <button class="close-btn" onclick="closeUpgrade()">
+      Miskien later
+    </button>
+  </div>
+</div>
+
+<body class="chat-body grade-{{ grade }}">
+
+<!-- HEADER -->
+<header class="chat-header">
+  <div class="chat-brand">
+  <div class="brand-title">
+    LeerSlim <span class="brand-sub">| Jou Slim Onderwyser </span>
+  </div>
+  <div class="brand-tagline">
+    Leer slimmer. Verstaan beter.
+  </div>
+    <div class="trust-strip">
+  <span>✔ CAPS-gefokus</span>
+  <span>✔ Graad-toepaslik</span>
+  <span>✔ Onderwyser-styl</span>
+</div>
+</div>
+
+  <div class="chat-meta">
+  <!-- Terugvoer -->
+  <button class="feedback-btn" onclick="openFeedback()">
+    💬 Terugvoer
+  </button>
+
+  <!-- Graad -->
+  <span class="grade-pill brand-grade">
+    Graad {{ grade }}
+  </span>
+
+  <!-- Logout -->
+  <a href="/logout" class="logout-btn" title="Meld af">
+     Uitlog
+  </a>
+</div>
+</header>
+
+<div class="trial-status">
+
+  {% if is_pro %}
+    <span class="trial-pill pro-pill">
+      🎓 LeerSlim Pro · <strong>10 vrae per dag</strong>
+    </span>
+  {% else %}
+    <span class="trial-pill">
+      Gratis vrae oor: <strong><span id="trialCount">{{ remaining_free }}</span></strong>
+    </span>
+  {% endif %}
+
+</div>
+
+<!-- LEARNING MODE SELECTOR (PERSISTENT) -->
+<div class="learning-mode">
+
+  <span class="mode-label">Hoe moet LeerSlim jou help?</span>
+
+  <div class="mode-tabs">
+    <button
+      type="button"
+      class="mode-tab active"
+      data-value="step"
+      data-desc="Leer elke stap rustig en duidelik"
+    >
+      Stap-vir-stap
+    </button>
+
+    <button
+      type="button"
+      class="mode-tab"
+      data-value="example"
+      data-desc="Sien ’n volledige worked voorbeeld"
+    >
+      Voorbeeld
+    </button>
+
+    <button
+      type="button"
+      class="mode-tab"
+      data-value="test"
+      data-desc="Beantwoord self om begrip te toets"
+    >
+      Toets begrip
+    </button>
+  </div>
+
+  <!-- Hidden input used by backend -->
+  <input type="hidden" id="helpStyleInput" value="step">
+
+</div>
+
+
+<!-- CHAT AREA -->
+<main class="chat-container" id="chat">
+  <!-- MOBILE HELP BUTTONS (ONLY VISIBLE ON MOBILE) -->
+<div class="mobile-help-buttons" id="mobileHelpTop">
+  <button type="button" data-mode="step" class="active">
+    Stap-vir-stap
+  </button>
+  <button type="button" data-mode="example">
+    Voorbeeld
+  </button>
+  <button type="button" data-mode="test">
+    Toets begrip
+  </button>
+</div>
+
+  <!-- GREETING -->
+  <div id="introSection">
+
+
+  <div class="bubble leerslim">
+    👋 Hallo {{ name }}!
+        Ek is LeerSlim, jou CAPS-gefokusde leermaat.
+        Ek sal jou stap-vir-stap help om self te verstaan, nie net antwoorde gee nie.
+  </div>
+
+  <div class="usage-hint">
+    <strong>💡 Hoe om LeerSlim te gebruik:</strong>
+    <ol>
+      <li>Kies die <b>vak</b></li>
+      <li>Tik die <b>huiswerkvraag presies soos dit in jou boek staan</b></li>
+      <li>Kies <b>Stap-vir-stap</b> vir beste begrip</li>
+      <li>Klik <b>Kry verduideliking</b></li>
+    </ol>
+    <small>
+      LeerSlim verduidelik die stappe —
+      dit help jou om <b>self te verstaan</b>, nie net antwoorde te kry nie.
+    </small>
+  </div>
+
+  <div class="parent-note">
+    👨‍👩‍👧 <strong>Vir Ouers:</strong>
+    LeerSlim verduidelik werk op ’n graad-toepaslike manier,
+    met ’n onderwyser-toon wat leer aanmoedig.
+  </div>
+
+</div>
+
+
+
+</main>
+
+<!-- TYPING -->
+<div class="typing-indicator" id="typing">
+  <span></span><span></span><span></span>
+  <p>LeerSlim dink…</p>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div class="feedback-modal" id="feedbackModal">
+  <div class="feedback-box">
+    <h3>🙏 Help ons verbeter</h3>
+
+    <p class="feedback-sub">
+      Jou terugvoer help ons om LeerSlim beter te maak vir leerders en ouers.
+    </p>
+
+    <label>Hoe was jou ervaring vandag?</label>
+    <select id="feedbackRating">
+      <option value="">Kies een</option>
+      <option>Baie goed</option>
+      <option>Goed</option>
+      <option>Gemiddeld</option>
+      <option>Nie so goed nie</option>
+    </select>
+
+    <label style="margin-top:12px;">Wat kan ons verbeter? (opsioneel)</label>
+    <textarea
+      id="feedbackText"
+      placeholder="Byvoorbeeld: meer voorbeelde, stadiger verduideliking, ens."
+    ></textarea>
+
+    <div class="feedback-actions">
+      <button class="btn-secondary" onclick="closeFeedback()">Sluit</button>
+      <button class="btn-primary" onclick="submitFeedback()">Stuur terugvoer</button>
+    </div>
+  </div>
+</div>
+
+<!-- INPUT -->
+<div class="input-wrapper">
+
+<!-- FILE PREVIEW -->
+<div id="filePreview" class="file-preview" style="display:none;">
+  <img
+    id="previewImage"
+    src=""
+    alt="Voorskou van opgelaaide werk"
+    style="display:none;"
+  >
+
+  <div class="file-preview-actions">
+    <span id="fileName"></span>
+    <button type="button" onclick="removeFile()">Verwyder</button>
+  </div>
+</div>
+  <form class="chat-input" onsubmit="sendMessage(event)">
+
+    <div class="attach-group">
+
+  <!-- Plus button (WhatsApp style) -->
+  <label class="icon-btn attach-btn plus-btn">
+    ➕
+    <input
+      type="file"
+      id="attachment"
+      name="image"
+      accept="image/*,.pdf,.doc,.docx"
+      hidden
+      onchange="handleFileSelect(this)"
+    >
+  </label>
+
+</div>
+    <select id="subject" class="subject-select" required>
+  <option value="" disabled selected>Kies vak</option>
+</select>
+
+    <textarea
+      id="question"
+      placeholder="Tik jou huiswerkvraag presies soos dit in jou boek staan..."
+      required
+    ></textarea>
+
+    <button type="submit">
+  <span class="send-text-desktop">Kry verduideliking</span>
+  <span class="send-text-mobile">Kry</span>
+</button>
+  </form>
+
+  <!-- DAILY LIMIT NOTE -->
+  <div class="limit-note">
+    ⏱ Fokus-leer: tot <b>10 vrae per dag</b> vir kwaliteit begrip
+  </div>
+</div>
+
+<script>
+function scrollChatToBottom(smooth = true) {
+  const chat = document.getElementById("chat");
+  if (!chat) return;
+
+  chat.scrollTo({
+    top: chat.scrollHeight,
+    behavior: smooth ? "smooth" : "auto"
+  });
+}
+</script>
+
+
+<script>
+let introHidden = false;
+
+async function sendMessage(e) {
+  e.preventDefault();
+
+  const question = document.getElementById("question");
+  const subject = document.getElementById("subject");
+  const helpStyle = document.getElementById("helpStyleInput").value;
+
+  const fileInput = document.getElementById("attachment");
+  const hasImage = fileInput && fileInput.files.length > 0;
+
+  // ❗ Allow image-only submissions
+  if ((!question.value.trim() && !hasImage) || !subject.value) return;
+
+  // Hide intro on first message
+  if (!introHidden) {
+    const intro = document.getElementById("introSection");
+    if (intro) {
+      intro.classList.add("fade-out");
+      setTimeout(() => intro.remove(), 350);
+    }
+    introHidden = true;
+  }
+  // 🔥 Hide top mobile help buttons after first message
+const mobileHelpTop = document.getElementById("mobileHelpTop");
+if (mobileHelpTop) {
+  mobileHelpTop.style.display = "none";
+}
+
+  const chat = document.getElementById("chat");
+  const typing = document.getElementById("typing");
+  const submitBtn = document.querySelector(".chat-input button");
+
+  // =========================
+  // USER BUBBLE
+  // =========================
+  const userBubble = document.createElement("div");
+  userBubble.className = "bubble user";
+
+  if (hasImage && !question.value.trim()) {
+    userBubble.innerText = "📸 Ek het my werk opgelaai.";
+  } else {
+    userBubble.innerText = question.value;
+  }
+
+  chat.appendChild(userBubble);
+  scrollChatToBottom(false);
+
+  // Disable input while thinking
+  question.disabled = true;
+  submitBtn.disabled = true;
+  subject.disabled = true;
+
+  const userText = question.value.trim();
+  question.value = "";
+  typing.style.display = "flex";
+  scrollChatToBottom(false);
+
+  // =========================
+  // FORM DATA
+  // =========================
+  const formData = new FormData();
+
+  // ✅ IMPORTANT: Ignore question text if image exists
+  if (hasImage) {
+    formData.append("question", "");
+    formData.append("image", fileInput.files[0]);
+  } else {
+    formData.append("question", userText);
+  }
+
+  formData.append("subject", subject.value);
+  formData.append("help_style", helpStyle);
+
+  // =========================
+  // SEND REQUEST
+  // =========================
+  const res = await fetch("/submit", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  typing.style.display = "none";
+  question.disabled = false;
+  submitBtn.disabled = false;
+  subject.disabled = false;
+  question.focus();
+
+  // =========================
+  // UPDATE TRIAL COUNTER
+  // =========================
+  if (typeof data.remaining !== "undefined" && data.remaining !== null) {
+    const counter = document.getElementById("trialCount");
+    if (counter) {
+      counter.innerText = data.remaining;
+      counter.classList.remove("pulse");
+      void counter.offsetWidth;
+      counter.classList.add("pulse");
+    }
+  }
+
+  // =========================
+  // LIMIT REACHED
+  // =========================
+  if (data.limit_reached) {
+    document.getElementById("upgradeModal").style.display = "flex";
+    return;
+  }
+
+  // =========================
+  // BOT RESPONSE
+  // =========================
+  if (data.answer) {
+  const botBubble = document.createElement("div");
+  botBubble.className = "bubble leerslim";
+  botBubble.innerText = data.answer;
+
+  // Small mode buttons under AI message
+  const modes = document.createElement("div");
+  modes.className = "ai-modes";
+  modes.innerHTML = `
+    <button data-mode="step">Stap-vir-stap</button>
+    <button data-mode="example">Voorbeeld</button>
+    <button data-mode="test">Toets begrip</button>
+  `;
+
+  modes.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      helpInput.value = btn.dataset.mode;
+
+      // visual active state
+      modes.querySelectorAll("button")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  botBubble.appendChild(modes);
+  chat.appendChild(botBubble);
+  scrollChatToBottom();
+}
+}
+
+function closeUpgrade() {
+  document.getElementById("upgradeModal").style.display = "none";
+}
+
+function goToPayment() {
+  window.location.href = "/pay";
+}
+</script>
+<script>
+const grade = parseInt("{{ grade }}");
+const subjectSelect = document.getElementById("subject");
+
+const juniorSubjects = [
+  "Afrikaans",
+  "Engels",
+  "Wiskunde",
+  "Natuurwetenskappe",
+  "Sosiale Wetenskappe",
+  "EBW",
+  "Tegnologie"
+];
+
+const seniorSubjects = [
+  "Afrikaans Huistaal",
+  "Afrikaans Eerste Addisionele Taal",
+  "Engels Huistaal",
+  "Engels Eerste Addisionele Taal",
+  "Wiskunde",
+  "Wiskundige Geletterdheid",
+  "Fisiese Wetenskappe",
+  "Lewenswetenskappe",
+  "Geografie",
+  "Geskiedenis",
+  "Besigheidstudies",
+  "Ekonomie",
+  "Rekeningkunde"
+];
+
+// Clear + populate
+function loadSubjects() {
+  subjectSelect.innerHTML =
+    `<option value="" disabled selected>Kies vak</option>`;
+
+  const subjects = grade <= 9 ? juniorSubjects : seniorSubjects;
+
+  subjects.forEach(sub => {
+    const opt = document.createElement("option");
+    opt.value = sub;
+    opt.textContent = sub;
+    subjectSelect.appendChild(opt);
+  });
+}
+
+// Run on page load
+loadSubjects();
+</script>
+
+<script>
+function openFeedback() {
+  document.getElementById("feedbackModal").style.display = "flex";
+}
+
+function closeFeedback() {
+  document.getElementById("feedbackModal").style.display = "none";
+}
+
+function submitFeedback() {
+  const rating = document.getElementById("feedbackRating").value;
+  const text = document.getElementById("feedbackText").value;
+
+  if (!rating) {
+    alert("Kies asseblief ’n ervaring.");
+    return;
+  }
+
+  // Later: send to backend / database
+  console.log("Feedback:", rating, text);
+
+  closeFeedback();
+  alert("Dankie! Jou terugvoer is ontvang 🙏");
+}
+</script>
+<script>
+let hasImage = false;
+
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const preview = document.getElementById("filePreview");
+  const img = document.getElementById("previewImage");
+  const name = document.getElementById("fileName");
+  const textarea = document.getElementById("question");
+
+  name.textContent = file.name;
+  hasImage = false;
+
+  // =========================
+  // IMAGE UPLOAD
+  // =========================
+  if (file.type.startsWith("image/")) {
+    hasImage = true;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      img.src = reader.result;
+      img.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+
+    // ✅ ONLY auto-fill if learner has NOT typed anything
+    // ❌ DO NOT inject fake question text for images
+textarea.value = "";
+textarea.placeholder =
+  "Jy het ’n foto opgelaai. Tik net hier as jy iets wil byvoeg (opsioneel).";
+
+  // =========================
+  // NON-IMAGE FILE (PDF, DOC)
+  // =========================
+  } else {
+    img.style.display = "none";
+
+    if (textarea.value.trim() === "") {
+      textarea.value =
+        "📄 Ek het ’n lêer opgelaai.\n\n" +
+        "Beskryf asseblief waar jy onseker is.";
+    }
+  }
+
+  preview.style.display = "flex";
+  textarea.focus();
+
+  // ✅ Auto-scroll to preview
+  preview.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function removeFile() {
+  const input = document.getElementById("attachment");
+  const preview = document.getElementById("filePreview");
+  const img = document.getElementById("previewImage");
+
+  input.value = "";
+  img.src = "";
+  img.style.display = "none";
+  preview.style.display = "none";
+
+  hasImage = false;
+}
+</script>
+
+
+<script>
+const tabs = document.querySelectorAll(".mode-tab");
+const helpInput = document.getElementById("helpStyleInput");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    helpInput.value = tab.dataset.value;
+  });
+});
+</script>
+<script>
+/* Mobile help buttons logic */
+document.querySelectorAll(".mobile-help-buttons button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Set hidden input for backend
+    document.getElementById("helpStyleInput").value = btn.dataset.mode;
+
+    // Visual active state
+    document.querySelectorAll(".mobile-help-buttons button")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>

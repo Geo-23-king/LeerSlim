@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+<meta charset="UTF-8">
+<title>Begin met LeerSlim</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="onboard-container">
+
+  <!-- MAIN TITLE -->
+  <h1>Welkom by LeerSlim 👋</h1>
+  <p class="subtitle">Vertel ons eers van die leerder</p>
+
+  <form method="post" action="/chat" class="onboarding-form" onsubmit="showLoading()">
+
+    <!-- Dynamic grade message -->
+    <p class="form-intro" id="welcome-text">
+      Vul die leerder se besonderhede in om te begin leer.
+    </p>
+
+    <input
+      type="text"
+      name="name"
+      placeholder="Leerder se naam"
+      required
+    >
+
+    <select name="grade" required onchange="updateWelcome()">
+      <option value="">Kies graad</option>
+      <option value="4">Graad 4</option>
+      <option value="5">Graad 5</option>
+      <option value="6">Graad 6</option>
+      <option value="7">Graad 7</option>
+      <option value="8">Graad 8</option>
+      <option value="9">Graad 9</option>
+      <option value="10">Graad 10</option>
+      <option value="11">Graad 11</option>
+      <option value="12">Graad 12</option>
+    </select>
+
+    <button type="submit" class="send-btn" id="submitBtn">
+      Begin leer
+    </button>
+
+  </form>
+</div>
+
+<script>
+function updateWelcome() {
+  const grade = document.querySelector('select[name="grade"]').value;
+  const text = document.getElementById("welcome-text");
+
+  if (!grade) {
+    text.innerText = "Vul die leerder se besonderhede in om te begin leer.";
+    return;
+  }
+
+  text.innerText = `Graad ${grade} verduidelikings – eenvoudig, veilig en stap vir stap.`;
+}
+
+function showLoading() {
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerText = "LeerSlim is besig…";
+}
+</script>
+
+</body>
+</html>

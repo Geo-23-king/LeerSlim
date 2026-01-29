@@ -1,0 +1,341 @@
+/* ================================
+   ROOT + BRAND COLORS
+================================ */
+
+:root {
+  --primary: #1f3b5c;
+  --primary-dark: #172e47;
+  --accent: #3b82f6;
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --radius: 14px;
+}
+
+/* ================================
+   BASE RESET
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ================================
+   SIGNUP PAGE WRAPPER
+================================ */
+/* ================================
+   SIGNUP PAGE WRAPPER (WITH BRAND BACKGROUND)
+================================ */
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  background-color: var(--bg);
+  background-image: url("/static/leerslim-logo1.png");
+  background-repeat: repeat;
+  background-size: 110px 110px;
+  position: relative;
+}
+
+
+/* Soft overlay to keep background subtle */
+.signup-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 247, 251, 0.96);
+  pointer-events: none;
+}
+
+/* ================================
+   SIGNUP CARD
+================================ */
+.signup-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   HEADINGS
+================================ */
+.signup-card h1 {
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: var(--primary);
+}
+
+.signup-card p.sub {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+/* ================================
+   FORM ELEMENTS
+================================ */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* ================================
+   CTA BUTTON
+================================ */
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+/* ================================
+   FREE TRIAL NOTE
+================================ */
+.trial-note {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.trial-note strong {
+  color: var(--primary);
+}
+
+/* ================================
+   SMALL TEXT / FOOTER
+================================ */
+.signup-footer {
+  margin-top: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ================================
+   MOBILE POLISH
+================================ */
+@media (max-width: 480px) {
+  .signup-card {
+    padding: 28px 22px;
+  }
+
+  .signup-card h1 {
+    font-size: 22px;
+  }
+}
+
+/* ================================
+   MICRO-POLISH (PRO FEEL)
+================================ */
+
+/* Card entrance animation */
+.signup-card {
+  animation: fadeUp 0.5s ease-out;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button loading state (future-ready) */
+.btn-primary:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Subtle divider feel */
+.signup-card::after {
+  content: "";
+  display: block;
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* ================================
+   SIGNUP LOGO (IMPROVED)
+================================ */
+.signup-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.signup-logo img {
+  height: 100px;          /* 🔥 Bigger & readable */
+  width: auto;
+  opacity: 1;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 480px) {
+  .signup-logo img {
+    height: 64px;
+  }
+}
+}
+
+.pin-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pin-wrapper input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.pin-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.pin-toggle:hover {
+  opacity: 1;
+}
+/* Forgot PIN link */
+.forgot-pin {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2563eb !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.forgot-pin:hover {
+  text-decoration: underline;
+}
+
+.forgot-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.forgot-pin::before {
+  content: "🔑";
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+
+  .signup-card {
+    width: 94%;
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .signup-card h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .forgot-pin {
+    font-size: 13px;
+    text-align: right;
+    display: block;
+    margin-top: 6px;
+  }
+}
+
+.error-box {
+  background: #ffe5e5;
+  color: #b00020;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.login-hint {
+  background: #f4f8ff;
+  border: 1px solid #dbe6ff;
+  color: #2b4a7f;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+}
